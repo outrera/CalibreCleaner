@@ -31,15 +31,15 @@
             </Grid.ColumnDefinitions>
 
             <Label Grid.Row="0" Grid.Column="0" Content="Browse to your &quot;Calibre Library&quot; folder..." />
-            <TextBox Grid.Row="1" Grid.Column="0" x:Name="textBox" HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" VerticalAlignment="Top" Width="250"/>
+            <TextBox Grid.Row="1" Grid.Column="0" x:Name="pathTextBox" HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" VerticalAlignment="Top" Width="250"/>
             <Button Grid.Row="1" Grid.Column="1" Margin="10,0,0,0" x:Name="browseButton" Content="Browse" HorizontalAlignment="Left" VerticalAlignment="Top" Width="74" />
             <Button Grid.Row="1" Grid.Column="2" Margin="10,0,0,0" x:Name="submitButton" Content="Analyse" HorizontalAlignment="Left" VerticalAlignment="Top" Width="74" />
         </Grid>
 
         <Label Grid.Row="1" Grid.Column="0" Margin="30,20,0,0" Content="Books on the filesystem that are missing from the Calibre database:" />
-        <DataGrid Grid.Row="2" Grid.Column="0" Margin="30,0,0,0" x:Name="dataGrid" HorizontalAlignment="Left" VerticalAlignment="Top" Height="200" Width="450"/>
+        <DataGrid Grid.Row="2" Grid.Column="0" Margin="30,0,0,0" x:Name="dataGrid" HorizontalAlignment="Left" VerticalAlignment="Top" Height="200" Width="450" />
 
         <Label Grid.Row="3" Grid.Column="0" Margin="30,20,0,0" Content="Books in the Calibre database that are missing on the filesystem:" />
-        <DataGrid Grid.Row="4" Grid.Column="0" Margin="30,45,0,0" x:Name="dataGrid2" HorizontalAlignment="Left" VerticalAlignment="Top" Height="200" Width="450"/>
+        <DataGrid Grid.Row="4" Grid.Column="0" Margin="30,45,0,0" x:Name="dataGrid2" HorizontalAlignment="Left" VerticalAlignment="Top" Height="200" Width="450" />
     </Grid>
 </Window>
