@@ -12,6 +12,7 @@ namespace CalibreCleaner
         {
             InitializeComponent();
             browseButton.Click += BrowseButton_Click;
+            submitButton.Click += SubmitButton_Click;
         }
 
         private void BrowseButton_Click(object sender, RoutedEventArgs e)
@@ -23,5 +24,11 @@ namespace CalibreCleaner
                 pathTextBox.Text = dialog.SelectedPath;
             }
         }
+
+        private void SubmitButton_Click(object sender, RoutedEventArgs e)
+        {
+            throw new System.NotImplementedException();
+        }
+
     }
 }
