@@ -12,7 +12,7 @@ namespace CalibreCleaner
     {
         List<string> findPathsInDatabase(string calibrePath)
         {
-            string databasePath = String.Format(@"{0}\metadata.db", calibrePath);
+            string databasePath = Path.Combine(calibrePath, "metadata.db");
             if (!File.Exists(databasePath))
             {
                 throw new CleanerServiceException("Could not open a \"metadata.db\" database file in the specified path");
@@ -71,6 +71,19 @@ namespace CalibreCleaner
                 }
             }
             */
+        }
+
+        List<string> findPathsOnFileSystem(string calibrePath)
+        {
+            List<string> paths = new List<string>();
+            foreach (string authorDirectory in Directory.GetDirectories(calibrePath))
+            {
+                foreach (string bookDirectory in Directory.GetDirectories(Path.Combine(calibrePath, authorDirectory)))
+                {
+                    paths.Add(Path.Combine(authorDirectory, bookDirectory));
+                }
+            }
+            return paths;
         }
     }
 

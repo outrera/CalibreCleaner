@@ -1,0 +1,7 @@
+#This is just here to force Git to allow an empty directory to be committed.  This empty 
+# directory structure is used by the unit test suite.
+#
+# The line below causes Git to ignore everyting in this directory except for the .gitignore 
+# file itself.
+# 
+!.gitignore
