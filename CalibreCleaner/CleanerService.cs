@@ -1,8 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Data.SQLite;
 using System.IO;
 
@@ -30,7 +28,6 @@ namespace CalibreCleaner
                         while (reader.Read())
                         {
                             paths.Add(reader.GetString(0));
-                            Console.WriteLine(reader.GetString(0));
                         }
                     }
 
@@ -42,15 +39,11 @@ namespace CalibreCleaner
 
         List<string> findPathsOnFilesystem(string calibrePath)
         {
-            List<string> paths = new List<string>();
-            foreach (string authorDirectory in Directory.GetDirectories(calibrePath))
-            {
-                foreach (string bookDirectory in Directory.GetDirectories(Path.Combine(calibrePath, authorDirectory)))
-                {
-                    paths.Add(Path.Combine(authorDirectory, bookDirectory));
-                }
-            }
-            return paths;
+            return Directory.GetDirectories(calibrePath).SelectMany(authorDirectory =>
+                Directory.GetDirectories(Path.Combine(calibrePath, authorDirectory)).Select(bookDirectory =>
+                    Path.Combine(authorDirectory, bookDirectory)
+                )
+            ).ToList();
         }
     }
 
