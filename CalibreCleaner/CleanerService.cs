@@ -38,42 +38,9 @@ namespace CalibreCleaner
                 }
             }
             return paths;
-            /*
-            using (SQLiteConnection connection = new SQLiteConnection(@"Data Source=c:\Users\Steve\Desktop\test.db3"))
-            {
-                using (SQLiteCommand command = new SQLiteCommand(connection))
-                {
-                    connection.Open();
-
-                    command.CommandText = @"CREATE TABLE IF NOT EXISTS [MyTable] (
-                                          [ID] INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
-                                          [Key] NVARCHAR(2048)  NULL,
-                                          [Value] VARCHAR(2048)  NULL
-                                          )";
-                    command.ExecuteNonQuery();
-
-                    command.CommandText = "INSERT INTO MyTable (Key, Value) VALUES ('key one', 'value one')";
-                    command.ExecuteNonQuery();
-
-                    command.CommandText = "INSERT INTO MyTable (Key, Value) VALUES ('key two', 'value two')";
-                    command.ExecuteNonQuery();
-
-                    command.CommandText = "SELECT * FROM MyTable";
-                    using (SQLiteDataReader reader = command.ExecuteReader())
-                    {
-                        while (reader.Read())
-                        {
-                            Console.WriteLine("{0} - {1}", reader["key"], reader["value"]);
-                        }
-                    }
-
-                    connection.Close();
-                }
-            }
-            */
         }
 
-        List<string> findPathsOnFileSystem(string calibrePath)
+        List<string> findPathsOnFilesystem(string calibrePath)
         {
             List<string> paths = new List<string>();
             foreach (string authorDirectory in Directory.GetDirectories(calibrePath))

@@ -36,33 +36,12 @@ namespace CalibreCleaner
         }
 
         [TestMethod]
-        public void TestAddGitignore()
+        public void TestFilePathsOnFilesytem()
         {
-            string gitignoreText =
-@"#This is just here to force Git to allow an empty directory to be committed.  This empty 
-# directory structure is used by the unit test suite.
-#
-# The line below causes Git to ignore everyting in this directory except for the .gitignore 
-# file itself.
-# 
-!.gitignore
-";
-            string path = Path.Combine(Directory.GetCurrentDirectory(), "testdata");
-            foreach (string authorDirectory in Directory.GetDirectories(path))
-            {
-                foreach (string bookDirectory in Directory.GetDirectories(Path.Combine(path, authorDirectory)))
-                {
-                    string filename = Path.Combine(path, authorDirectory, bookDirectory, ".gitignore");
-                    Console.WriteLine(filename);
-                    if (!File.Exists(filename))
-                    {
-                        using (StreamWriter writer = File.CreateText(filename))
-                        {
-                            writer.Write(gitignoreText);                          
-                        }
-                    }
-                }
-            }
+            CleanerService rawService = new CleanerService();
+            PrivateObject service = new PrivateObject(rawService);
+            List<string> paths = service.Invoke("findPathsOnFilesystem", Path.Combine(Directory.GetCurrentDirectory(), "testdata")) as List<string>;
+            Assert.AreEqual(400, paths.Count);
         }
     }
 }
