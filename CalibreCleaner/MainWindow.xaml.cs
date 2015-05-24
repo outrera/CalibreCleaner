@@ -13,8 +13,27 @@ namespace CalibreCleaner
         public MainWindow()
         {
             InitializeComponent();
+
+            exitMenuItem.Click += ExitMenuItem_Click;
+            aboutMenuItem.Click += AboutMenuItem_Click;
             browseButton.Click += BrowseButton_Click;
             submitButton.Click += SubmitButton_Click;
+        }
+
+        private void AboutMenuItem_Click(object sender, RoutedEventArgs e)
+        {
+            System.Windows.MessageBox.Show(
+@"CalibreCleaner, version 1.0
+by Steve Perkins
+
+http://steveperkins.com
+https://github.com/steve-perkins/CalibreCleaner"
+                , "About");
+        }
+
+        private void ExitMenuItem_Click(object sender, RoutedEventArgs e)
+        {
+            System.Windows.Application.Current.Shutdown();
         }
 
         private void BrowseButton_Click(object sender, RoutedEventArgs e)

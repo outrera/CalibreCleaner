@@ -5,41 +5,30 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:CalibreCleaner"
         mc:Ignorable="d"
-        Title="Calibre Cleaner" Height="650" Width="525">
-    <Grid>
-        <Grid.RowDefinitions>
-            <RowDefinition Height="Auto" />
-            <RowDefinition Height="Auto" />
-            <RowDefinition Height="Auto" />
-            <RowDefinition Height="*" />
-        </Grid.RowDefinitions>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="Auto" />
-            <ColumnDefinition Width="Auto" />
-            <ColumnDefinition Width="*" />
-        </Grid.ColumnDefinitions>
+        Title="Calibre Cleaner" Height="620" Width="525">
+    <DockPanel Background="AntiqueWhite">
+        <Menu DockPanel.Dock="Top">
+            <MenuItem Header="_File">
+                <MenuItem Header="_Exit" x:Name="exitMenuItem" />
+            </MenuItem>
+            <MenuItem Header="_Help">
+                <MenuItem Header="_About" x:Name="aboutMenuItem" />
+            </MenuItem>
+        </Menu>
 
-        <Grid Grid.Row="0" Grid.Column="0" Margin="30,30,0,0">
-            <Grid.RowDefinitions>
-                <RowDefinition Height="Auto" />
-                <RowDefinition Height="*" />
-            </Grid.RowDefinitions>
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="Auto" />
-                <ColumnDefinition Width="Auto" />
-                <ColumnDefinition Width="*" />
-            </Grid.ColumnDefinitions>
+        <StackPanel Margin="10,10,10,10">
+            <Label Content="Browse to your &quot;Calibre Library&quot; folder..." />
+            <StackPanel Orientation="Horizontal">
+                <TextBox x:Name="pathTextBox" Width="250"/>
+                <Button x:Name="browseButton" Content="Browse" Width="74" Margin="10,0,0,0" />
+                <Button x:Name="submitButton" Content="Analyse" Width="74" Margin="10,0,0,0" />
+            </StackPanel>
 
-            <Label Grid.Row="0" Grid.Column="0" Content="Browse to your &quot;Calibre Library&quot; folder..." />
-            <TextBox Grid.Row="1" Grid.Column="0" x:Name="pathTextBox" HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" VerticalAlignment="Top" Width="250"/>
-            <Button Grid.Row="1" Grid.Column="1" Margin="10,0,0,0" x:Name="browseButton" Content="Browse" HorizontalAlignment="Left" VerticalAlignment="Top" Width="74" />
-            <Button Grid.Row="1" Grid.Column="2" Margin="10,0,0,0" x:Name="submitButton" Content="Analyse" HorizontalAlignment="Left" VerticalAlignment="Top" Width="74" />
-        </Grid>
+            <Label Content="Books on the filesystem that are missing from the Calibre database:" Margin="0,20,0,0"/>
+            <DataGrid x:Name="missingFromDatabaseDataGrid" Height="200" />
 
-        <Label Grid.Row="1" Grid.Column="0" Margin="30,20,0,0" Content="Books on the filesystem that are missing from the Calibre database:" />
-        <DataGrid Grid.Row="2" Grid.Column="0" Margin="30,0,0,0" x:Name="missingFromDatabaseDataGrid" HorizontalAlignment="Left" VerticalAlignment="Top" Height="200" Width="450" />
-
-        <Label Grid.Row="3" Grid.Column="0" Margin="30,20,0,0" Content="Books in the Calibre database that are missing on the filesystem:" />
-        <DataGrid Grid.Row="4" Grid.Column="0" Margin="30,45,0,0" x:Name="missingFromFilesystemDataGrid" HorizontalAlignment="Left" VerticalAlignment="Top" Height="200" Width="450" />
-    </Grid>
+            <Label Content="Books in the Calibre database that are missing on the filesystem:" Margin="0,20,0,0"/>
+            <DataGrid x:Name="missingFromFilesystemDataGrid" Height="200" />
+        </StackPanel>
+    </DockPanel>
 </Window>
