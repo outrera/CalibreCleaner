@@ -1,4 +1,6 @@
-﻿using System.Windows;
+﻿using System;
+using System.Collections.Generic;
+using System.Windows;
 using System.Windows.Forms;
 
 namespace CalibreCleaner
@@ -27,7 +29,18 @@ namespace CalibreCleaner
 
         private void SubmitButton_Click(object sender, RoutedEventArgs e)
         {
-            throw new System.NotImplementedException();
+            try
+            {
+                List<BookMetadata> booksMissingInDatabase, booksMissingOnFilesystem;
+                CleanerService service = new CleanerService();
+                service.findMissingBooks(pathTextBox.Text, out booksMissingInDatabase, out booksMissingOnFilesystem);
+                missingFromDatabaseDataGrid.ItemsSource = booksMissingInDatabase;
+                missingFromFilesystemDataGrid.ItemsSource = booksMissingOnFilesystem;
+            }
+            catch (Exception ex)
+            {
+                System.Windows.MessageBox.Show(ex.Message, "An error has occurred");
+            }
         }
 
     }

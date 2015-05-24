@@ -37,9 +37,9 @@
         </Grid>
 
         <Label Grid.Row="1" Grid.Column="0" Margin="30,20,0,0" Content="Books on the filesystem that are missing from the Calibre database:" />
-        <DataGrid Grid.Row="2" Grid.Column="0" Margin="30,0,0,0" x:Name="dataGrid" HorizontalAlignment="Left" VerticalAlignment="Top" Height="200" Width="450" />
+        <DataGrid Grid.Row="2" Grid.Column="0" Margin="30,0,0,0" x:Name="missingFromDatabaseDataGrid" HorizontalAlignment="Left" VerticalAlignment="Top" Height="200" Width="450" />
 
         <Label Grid.Row="3" Grid.Column="0" Margin="30,20,0,0" Content="Books in the Calibre database that are missing on the filesystem:" />
-        <DataGrid Grid.Row="4" Grid.Column="0" Margin="30,45,0,0" x:Name="dataGrid2" HorizontalAlignment="Left" VerticalAlignment="Top" Height="200" Width="450" />
+        <DataGrid Grid.Row="4" Grid.Column="0" Margin="30,45,0,0" x:Name="missingFromFilesystemDataGrid" HorizontalAlignment="Left" VerticalAlignment="Top" Height="200" Width="450" />
     </Grid>
 </Window>
