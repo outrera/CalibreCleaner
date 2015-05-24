@@ -1,5 +1,4 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
-using System;
 using System.Collections.Generic;
 using System.IO;
 
@@ -8,16 +7,18 @@ namespace CalibreCleaner
     [TestClass]
     public class CleanerServiceTests
     {
+
+        readonly string TestdataPath = Path.Combine(Directory.GetCurrentDirectory(), "testdata");
+
         [TestMethod]
         [ExpectedException(typeof(CleanerServiceException))]
         public void TestNoCalibreDatabasePresent()
         {
             try
             {
-                CleanerService rawService = new CleanerService();
-                PrivateObject service = new PrivateObject(rawService);
-                // TODO: Switch to higher-level method once it's written
-                service.Invoke("findPathsInDatabase", "non-existant path");
+                CleanerService service = new CleanerService();
+                List<BookMetadata> booksMissingInDatabase, booksMissingOnFilesystem;
+                service.findMissingBooks("non-existant-path", out booksMissingInDatabase, out  booksMissingOnFilesystem);
             }
             catch (CleanerServiceException e)
             {
@@ -31,7 +32,7 @@ namespace CalibreCleaner
         {
             CleanerService rawService = new CleanerService();
             PrivateObject service = new PrivateObject(rawService);
-            List<string> paths = service.Invoke("findPathsInDatabase", Path.Combine(Directory.GetCurrentDirectory(), "testdata")) as List<string>;
+            List<string> paths = service.Invoke("findPathsInDatabase", TestdataPath) as List<string>;
             Assert.AreEqual(393, paths.Count);
         }
 
@@ -40,8 +41,18 @@ namespace CalibreCleaner
         {
             CleanerService rawService = new CleanerService();
             PrivateObject service = new PrivateObject(rawService);
-            List<string> paths = service.Invoke("findPathsOnFilesystem", Path.Combine(Directory.GetCurrentDirectory(), "testdata")) as List<string>;
+            List<string> paths = service.Invoke("findPathsOnFilesystem", TestdataPath) as List<string>;
             Assert.AreEqual(400, paths.Count);
+        }
+
+        [TestMethod]
+        public void TestFindMissingBooks()
+        {
+            CleanerService service = new CleanerService();
+            List<BookMetadata> booksMissingInDatabase, booksMissingOnFilesystem;
+            service.findMissingBooks(TestdataPath, out booksMissingInDatabase, out booksMissingOnFilesystem);
+            Assert.AreEqual(12, booksMissingInDatabase.Count);
+            Assert.AreEqual(5, booksMissingOnFilesystem.Count);
         }
     }
 }
