@@ -16,7 +16,11 @@ namespace CalibreCleaner
 
     public class CleanerService
     {
-        readonly Func<string, BookMetadata> stringToBookMetadata = path => 
+        private CleanerService()
+        {
+        }
+
+        readonly static Func<string, BookMetadata> stringToBookMetadata = path => 
         {
             int backslashIndex = path.IndexOf('\\') >= 0 ? path.IndexOf('\\') : 0;
             int openParensIndex = path.LastIndexOf('(');
@@ -29,7 +33,7 @@ namespace CalibreCleaner
             };
         };
 
-        public void findMissingBooks(string calibrePath, out List<BookMetadata> booksMissingInDatabase, out List<BookMetadata> booksMissingOnFilesystem)
+        public static void findMissingBooks(string calibrePath, out List<BookMetadata> booksMissingInDatabase, out List<BookMetadata> booksMissingOnFilesystem)
         {
             List<string> pathsInDatabase = findPathsInDatabase(calibrePath);
             List<string> pathsOnFilesystem = findPathsOnFilesystem(calibrePath);
@@ -40,7 +44,7 @@ namespace CalibreCleaner
         }
 
         [SuppressMessage("Microsoft.Usage", "CA2202:Do not dispose objects multiple times")]
-        List<string> findPathsInDatabase(string calibrePath)
+        static List<string> findPathsInDatabase(string calibrePath)
         {
             string databasePath = Path.Combine(calibrePath, "metadata.db");
             if (!File.Exists(databasePath))
@@ -69,7 +73,7 @@ namespace CalibreCleaner
             return paths;
         }
 
-        List<string> findPathsOnFilesystem(string calibrePath)
+        static List<string> findPathsOnFilesystem(string calibrePath)
         {
             return Directory.GetDirectories(calibrePath).SelectMany(authorDirectory =>
                 Directory.GetDirectories(Path.Combine(calibrePath, authorDirectory)).Select(bookDirectory =>

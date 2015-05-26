@@ -16,9 +16,8 @@ namespace CalibreCleaner
         {
             try
             {
-                CleanerService service = new CleanerService();
                 List<BookMetadata> booksMissingInDatabase, booksMissingOnFilesystem;
-                service.findMissingBooks("non-existant-path", out booksMissingInDatabase, out  booksMissingOnFilesystem);
+                CleanerService.findMissingBooks("non-existant-path", out booksMissingInDatabase, out  booksMissingOnFilesystem);
             }
             catch (CleanerServiceException e)
             {
@@ -30,27 +29,24 @@ namespace CalibreCleaner
         [TestMethod]
         public void TestFindPathsInDatabase()
         {
-            CleanerService rawService = new CleanerService();
-            PrivateObject service = new PrivateObject(rawService);
-            List<string> paths = service.Invoke("findPathsInDatabase", TestdataPath) as List<string>;
+            PrivateType service = new PrivateType(typeof(CleanerService));
+            List<string> paths = service.InvokeStatic("findPathsInDatabase", TestdataPath) as List<string>;
             Assert.AreEqual(393, paths.Count);
         }
 
         [TestMethod]
         public void TestFilePathsOnFilesytem()
         {
-            CleanerService rawService = new CleanerService();
-            PrivateObject service = new PrivateObject(rawService);
-            List<string> paths = service.Invoke("findPathsOnFilesystem", TestdataPath) as List<string>;
+            PrivateType service = new PrivateType(typeof(CleanerService));
+            List<string> paths = service.InvokeStatic("findPathsOnFilesystem", TestdataPath) as List<string>;
             Assert.AreEqual(400, paths.Count);
         }
 
         [TestMethod]
         public void TestFindMissingBooks()
         {
-            CleanerService service = new CleanerService();
             List<BookMetadata> booksMissingInDatabase, booksMissingOnFilesystem;
-            service.findMissingBooks(TestdataPath, out booksMissingInDatabase, out booksMissingOnFilesystem);
+            CleanerService.findMissingBooks(TestdataPath, out booksMissingInDatabase, out booksMissingOnFilesystem);
             Assert.AreEqual(12, booksMissingInDatabase.Count);
             Assert.AreEqual(5, booksMissingOnFilesystem.Count);
         }

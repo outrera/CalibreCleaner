@@ -51,8 +51,7 @@ https://github.com/steve-perkins/CalibreCleaner"
             try
             {
                 List<BookMetadata> booksMissingInDatabase, booksMissingOnFilesystem;
-                CleanerService service = new CleanerService();
-                service.findMissingBooks(pathTextBox.Text, out booksMissingInDatabase, out booksMissingOnFilesystem);
+                CleanerService.findMissingBooks(pathTextBox.Text, out booksMissingInDatabase, out booksMissingOnFilesystem);
                 missingFromDatabaseDataGrid.ItemsSource = booksMissingInDatabase;
                 missingFromFilesystemDataGrid.ItemsSource = booksMissingOnFilesystem;
             }
