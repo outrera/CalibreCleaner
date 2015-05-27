@@ -17,9 +17,9 @@
         </Menu>
 
         <StackPanel Margin="10,10,10,10">
-            <Label Content="Browse to your &quot;Calibre Library&quot; folder..." />
+            <Label Content="Browse to your &quot;Calibre Library&quot; folder:" />
             <StackPanel Orientation="Horizontal">
-                <TextBox x:Name="pathTextBox" Width="250"/>
+                <TextBox x:Name="pathTextBox" Width="320"/>
                 <Button x:Name="browseButton" Content="Browse" Width="74" Margin="10,0,0,0" />
                 <Button x:Name="submitButton" Content="Analyse" Width="74" Margin="10,0,0,0" />
             </StackPanel>
